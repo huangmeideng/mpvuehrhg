@@ -52,7 +52,7 @@
                 </swiper>
             </div>
         </div>
-        <div class="course-detail-consult">
+        <div class="course-detail-consult" @click="onCourseConsult">
             咨询
         </div>
     </div>
@@ -135,6 +135,14 @@ export default {
          */
         onChangeSwiper(e) {
             this.currentTab = e.mp.detail.current
+        },
+        /**
+         * 咨询按钮点击事件
+         */
+        onCourseConsult() {
+            wx.navigateTo({
+                url: '../course_consult/main'
+            })
         }
     },
     mounted() {
