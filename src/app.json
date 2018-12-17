@@ -1,0 +1,52 @@
+{
+  "pages": [
+    "pages/article/main",
+    "pages/article/article_detail/main",
+    "pages/course/main",
+    "pages/course/course_consult/main",
+    "pages/course/course_detail/main",
+    "pages/live/main",
+    "pages/program/main",
+    "pages/user/main"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#C9513F",
+    "navigationBarTitleText": "好人好股",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/article/main",
+        "text": "资讯",
+        "iconPath": "static/tabicon/hrhg/new.png",
+        "selectedIconPath": "static/tabicon/hrhg/new_on.png"
+      },
+      {
+        "pagePath": "pages/course/main",
+        "text": "课程",
+        "iconPath": "static/tabicon/hrhg/course.png",
+        "selectedIconPath": "static/tabicon/hrhg/course_on.png"
+      },
+      {
+        "pagePath": "pages/live/main",
+        "text": "直播",
+        "iconPath": "static/tabicon/hrhg/live.png",
+        "selectedIconPath": "static/tabicon/hrhg/live_on.png"
+      },
+      {
+        "pagePath": "pages/program/main",
+        "text": "节目",
+        "iconPath": "static/tabicon/hrhg/program.png",
+        "selectedIconPath": "static/tabicon/hrhg/program_on.png"
+      },
+      {
+        "pagePath": "pages/user/main",
+        "text": "个人",
+        "iconPath": "static/tabicon/hrhg/user.png",
+        "selectedIconPath": "static/tabicon/hrhg/user_on.png"
+      }
+    ]
+  }
+}
