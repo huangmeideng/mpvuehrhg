@@ -5,6 +5,7 @@
     "pages/course/main",
     "pages/course/course_consult/main",
     "pages/course/course_detail/main",
+    "pages/course/course_video/main",
     "pages/live/main",
     "pages/program/main",
     "pages/user/main"

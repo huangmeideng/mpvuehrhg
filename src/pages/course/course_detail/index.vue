@@ -18,7 +18,7 @@
                     <swiper-item class="swiper-items">
                         <scroll-view class="scroll-views" :scroll-x="scrollX" :scroll-y="scrollY">
                             <div class="course-detail-content-catalog" v-show="currentTab===0?true:false">
-                                <div class="course-detail-catalog-item" v-for="(item,index) of courseDetailData.outline" :key="index">
+                                <div class="course-detail-catalog-item" v-for="(item,index) of courseDetailData.outline" :key="index" @click="onJumpCourseVideo(item.outline_link)">
                                     <span>第{{index+1}}节</span>
                                     <span>{{item.outline_title}}</span>
                                 </div>
@@ -142,6 +142,15 @@ export default {
         onCourseConsult() {
             wx.navigateTo({
                 url: '../course_consult/main'
+            })
+        },
+        /**
+         * 点击跳转视频播放页面
+         */
+        onJumpCourseVideo(outline_link) {
+            let link = encodeURIComponent(outline_link)
+            wx.navigateTo({
+                url: '../course_video/main?link=' + link
             })
         }
     },
