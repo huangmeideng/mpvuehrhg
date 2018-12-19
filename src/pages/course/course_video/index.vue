@@ -60,7 +60,7 @@ export default {
                     time: 3
                 }
             ],
-            localData: [
+            commentData: [
                 {
                     type: 1,
                     text: '这门课程非常好'
@@ -70,24 +70,26 @@ export default {
     },
     methods: {
         onSendDanMu(e) {
-            let danMuMessage = this.sendMessage
-            this.arrayMessage = danMuMessage
-            //发送弹幕
-            this.videoContext.sendDanmu({
-                text: danMuMessage,
-                color: utils.getRandomColor()
-            })
-            this.sendMessage = ''
-        }
-    },
-    computed: {
-        commentData: function() {
-            let commentMessage = {
-                type: 2,
-                text: this.arrayMessage
+            if(this.sendMessage === '') {
+                wx.showToast({
+                    title: '请输入内容',
+                    icon: 'warn',
+                    duration: 2000
+                })
+            } else{
+                let danMuMessage = this.sendMessage
+                this.sendMessage = ''
+                this.arrayMessage = danMuMessage
+                let itemData = {
+                    type: 2,
+                    text: danMuMessage
+                }
+                this.commentData.push(itemData)
+                this.videoContext.sendDanmu({
+                    text: danMuMessage,
+                    color: utils.getRandomColor()
+                })
             }
-            this.localData.push(commentMessage)
-            return this.localData
         }
     },
     mounted() {
