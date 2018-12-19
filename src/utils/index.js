@@ -51,11 +51,27 @@ function getRandomColor() {
   return '#' + rgb.join('')
 }
 
+/**
+ * 一维数组转二维数组
+ */
+function oneArrayToTwoArray(arr,num) {
+  let arrLen = Math.ceil(arr.length / num)
+  let twoArr = new Array(arrLen)
+  for (let i=0; i < arrLen; i++) {
+    twoArr[i] = new Array()
+  }
+  for( let j=0; j < arr.length; j++) {
+    twoArr[parseInt(j/num)][j%num] = arr[j]
+  }
+  return twoArr
+}
+
 
 export default {
   formatNumber,
   formatTime,
   getPageOptions,
   numToArray,
-  getRandomColor
+  getRandomColor,
+  oneArrayToTwoArray
 }
