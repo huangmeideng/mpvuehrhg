@@ -24,6 +24,9 @@
 <script>
 import CommonComment from "@/components/CommonComment"
 export default {
+    components: {
+        CommonComment
+    },
     data () {
         return {
             noticeUrl: '../../../static/icon/notice.png',
