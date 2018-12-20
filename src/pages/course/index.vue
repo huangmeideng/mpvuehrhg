@@ -181,8 +181,14 @@ export default {
         }
     },
     mounted() {
+        wx.showLoading({
+            title: '加载中'
+        })
         this.getCourseData("free")
         this.getCourseData("pay")
+        setTimeout(function(){
+            wx.hideLoading()
+        },1000)
     },
     onPullDownRefresh() {
         console.log("上拉刷新")

@@ -116,7 +116,13 @@ export default {
         }
     },
     mounted() {
+        wx.showLoading({
+            title: '加载中'
+        })
         this.getProgramData()
+        setTimeout(function(){
+            wx.hideLoading()
+        },1000)
     },
     /**
      * 上拉加载
