@@ -1,6 +1,6 @@
 <template>
     <div>
-        <program-list :programData="programData"></program-list>
+        <program-list :programData="programData" @listClick='onJumpProgramDetail'></program-list>
     </div>
 </template>
 
@@ -113,6 +113,14 @@ export default {
                     }
                 }
             })
+        },
+        /**
+         *  点击跳转详情事件
+         */
+        onJumpProgramDetail(id) {
+            wx.navigateTo({
+                url: './program_detail/main?room_id=' + id
+            })
         }
     },
     mounted() {
@@ -135,6 +143,14 @@ export default {
      */
     onPullDownRefresh() {
         this.getNewProgramData()
+    },
+    /**
+     * 页面分享
+     */
+    onShareAppMessage() {
+        return {
+            title: '好人好股- 节目单'
+        }
     }
 }
 </script>

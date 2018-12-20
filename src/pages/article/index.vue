@@ -127,7 +127,7 @@ export default {
     },
     onShareAppMessage() {
         return {
-            title: '好人好股'
+            title: '好人好股-课程'
         }
     }
 }

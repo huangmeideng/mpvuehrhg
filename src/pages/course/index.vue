@@ -198,6 +198,14 @@ export default {
      */
     onReachBottom() {
         this.getMoreCourseData(this.currentTab)
+    },
+    /**
+     * 分享
+     */
+    onShareAppMessage() {
+        return {
+            title: '好人好股-课程'
+        }
     }
 }
 </script>

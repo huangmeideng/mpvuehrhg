@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="program-list-box" v-for="(item,index) of programData" :key="index">
-            <div class="list-one">
+            <div class="list-one" @click="onJumpProgramDetail(item[0].room_id)">
                 <div class="list-header">
                     <img :src="item[0].room_image" alt="">
                 </div>
@@ -25,7 +25,7 @@
                     </div>
                 </div>
             </div>
-            <div class="list-two" v-if="item[1]">
+            <div class="list-two" v-if="item[1]" @click="onJumpProgramDetail(item[1].room_id)">
                 <div class="list-header">
                     <img :src="item[1].room_image" alt="">
                 </div>
@@ -62,6 +62,11 @@ export default {
             defaultImg: 'https://f.tdjin.com/live_room/default/default.png',
             iconUrl: '/static/icon/views.png',
             timeUrl: '/static/icon/time.png'
+        }
+    },
+    methods: {
+        onJumpProgramDetail(e) {
+            this.$emit('listClick',e)
         }
     }
 }
