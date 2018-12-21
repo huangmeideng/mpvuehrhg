@@ -1,6 +1,10 @@
-# mpvuedemo
+# 项目说明
 
-> A Mpvue project
+> 基于mpvue的好人好股商学院小程序
+
+#模块说明
+
+> 资讯模块, 课程模块,直播模块,节目模块,用户模块
 
 ## Build Setup
 
@@ -17,5 +21,3 @@ npm run build
 # build for production and view the bundle analyzer report
 npm run build --report
 ```
-
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
