@@ -6,7 +6,28 @@
 
 > 资讯模块, 课程模块,直播模块,节目模块,用户模块
 
-## Build Setup
+#项目截图
+
+##资讯
+![avatar](./picture/article.jpeg)
+
+##课程
+![avatar](./picture/course1.jpeg)
+![avatar](./picture/course2.jpeg)
+
+##视频播放详情页
+![avatar](./picture/player.jpeg)
+
+##直播页面
+![avatar](./picture/live.jpeg)
+
+##节目页面
+![avatar](./picture/program.jpeg)
+
+##个人页面
+![avatar](./picture/user.jpeg)
+
+# 构建
 
 ``` bash
 # install dependencies
