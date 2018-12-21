@@ -1,142 +1,159 @@
 <template>
     <div class="container">
-        <live-player class="live-video" src="rtmp://live.hkstv.hk.lxdns.com/live/hks2" mode="RTC" autoplay  @statechange="statechange" @error="error" />
-        <div class="video-notice">
-            <div class="notice-icon">
-                <img :src="noticeUrl" alt="">
-            </div>
-            <div class="notice-text">
-                这是公告内容哦，哈哈哈!!!
-            </div>
-        </div>
-        <div class="video-danmu-list">
-            <scroll-view class="scroll-views" :scroll-y="scrollY">
-                <common-comment :commentData="commentData"></common-comment>
-            </scroll-view>
-        </div>
-        <div class="video-danmu-commit">
-            <input type="text" placeholder="给视频加点料吧" v-model="sendMessage">
-            <div @click="onSendDanMu">发送</div>
-        </div>
+        <live-list v-if="showData" :liveData='liveData' @jumpLiveDetail="onJumpLiveDetail"></live-list>
+        <common-null v-if="showNull"></common-null>
     </div>
 </template>
 
 <script>
-import CommonComment from "@/components/CommonComment"
+import LiveList from './components/LiveList'
+import CommonNull from '../../components/CommonNull'
+import globalData from '../../stores/globalData'
 export default {
     components: {
-        CommonComment
+        LiveList,
+        CommonNull
     },
-    data () {
+    data() {
         return {
-            noticeUrl: '../../../static/icon/notice.png',
-            scrollY: true,
-            sendMessage: '',
-            arrayMessage: '',
-            commentData: [
-                {
-                    type: 1,
-                    text: '这门课程非常好'
-                }
-            ]
+            liveData: [],
+            page: 1,
+            pageSize: 10,
+            pageMax: 1
+        }
+    },
+    computed: {
+        showData: function() {
+            return this.liveData.length===0?false:true
+        },
+        showNull: function() {
+            return this.liveData.length===0?true:false
         }
     },
     methods: {
-        statechange(e) {
-            console.log('live-player code:', e.detail.code)
+        /**
+         * 获取初始直播数据
+         */
+        getLiveData () {
+            let that = this
+            wx.request({
+                url: globalData.state.programUrl + '?room_play_state=1',
+                header: {
+                    'content-type': 'application/json'
+                },
+                success (res) {
+                    let result = res.data
+                    if(result.status === 200) {
+                        that.pageMax = result.pagemax
+                        for(let item of result.data) {
+                            that.liveData.push(item)
+                        }
+                    } else {
+                        wx.showToast({
+                            title: '服务器出错',
+                            icon: 'warn',
+                            duration: 5000
+                        })
+                    }
+                }
+            })
         },
-        error(e) {
-            console.error('live-player error:', e.mp.detail.errMsg)
-        },
-        onSendDanMu(e) {
-            if(this.sendMessage === '') {
+        /**
+         * 获取更多数据
+         */
+        getMoreData() {
+            this.page ++
+            if(this.page <= this.pagemax) {
+                console.log('我还可以加载')
+                let that = this
+                wx.request({
+                    url: globalData.state.programUrl + '?room_play_state=1&page=' + this.page,
+                    header: {
+                        'content-type': 'application/json'
+                    },
+                    success(res) {
+                        let result = res.data
+                        if(result.status === 200){
+                            for(let item of result.data) {
+                                that.liveData.push(item)
+                            }
+                        } else{
+                            wx.showToast({
+                                title: '服务器出错',
+                                icon: 'warn',
+                                duration: 5000
+                            })
+                        }
+                    }
+                })
+            } else{
                 wx.showToast({
-                    title: '请输入内容',
+                    title: '我是有底线的',
                     icon: 'warn',
                     duration: 2000
                 })
-            } else{
-                let danMuMessage = this.sendMessage
-                this.sendMessage = ''
-                this.arrayMessage = danMuMessage
-                let itemData = {
-                    type: 2,
-                    text: danMuMessage
-                }
-                this.commentData.push(itemData)
             }
+        },
+        /**
+         *  刷新数据
+         */
+        getRefreshData() {
+            this.liveData = []
+            this.page = 1
+            this.pagemax = 1
+            let that = this
+            wx.request({
+                url: globalData.state.programUrl + '?room_play_state=1',
+                header: {
+                    'content-type': 'application/json'
+                },
+                success(res) {
+                    let result = res.data
+                    if(result.status === 200) {
+                        for(let item of result.data) {
+                            console.log('刷新成功')
+                            that.liveData.push(item)
+                        }
+                    } else{
+                        wx.showToast({
+                            title: '服务器出错',
+                            icon: 'warn',
+                            duration: 5000
+                        })
+                    }
+                }
+            })
+        },
+        onJumpLiveDetail (id) {
+            console.log(id)
+            wx.navigateTo({
+                url: './live_detail/main?room_id=' + id
+            })
+        }
+    },
+    mounted() {
+        wx.showLoading({
+            title: '加载中'
+        })
+        this.getLiveData()
+        setTimeout(function(){
+            wx.hideLoading()
+        },1000)
+    },
+    onReachBottom () {
+        this.getMoreData()
+    },
+    onPullDownRefresh() {
+        this.getRefreshData()
+    },
+    onShareAppMessage() {
+        return {
+            title: '好人好股-直播'
         }
     }
 }
 </script>
 
 <style scoped>
-    .live-video {
-        width: 100%;
-        height: 450rpx;
-    }
-    .video-notice {
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-        height: 50rpx;
-        align-items: center;
-        background-color: #C8513E;
-    }
-    .notice-icon {
-        width: 40rpx;
-        height: 40rpx;
-        margin-left: 40rpx;
-    }
-    .notice-icon img {
-        width: 100%;
-        height: 100%;
-    }
-    .notice-text {
-        color: #ffffff;
-        line-height: 50rpx;
-        font-size: 24rpx;
-        margin-left: 30rpx;
-    }
-        .video-danmu-list {
-        background-color: #ffffff;
-        height: 680rpx;
-        border-bottom: 1rpx solid #C8513E;
-    }
-    .scroll-views {
-        height: 100%;
-    }
-    .video-danmu-commit {
-        position: fixed;
-        bottom: 0;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        width: 100%;
-        height: 70rpx;
-        border: 1rpx solid #F5F4F4;
-        background-color: #ffffff;
-    }
-    .video-danmu-commit input {
-        background-color: #F5F4F4;
-        height: 60rpx;
-        width: 500rpx;
-        border-radius: 40rpx;
-        margin-left: 40rpx;
-        font-family: 'Microsoft YaHei';
-        font-size: 24rpx;
-        text-align: center;
-    }
-    .video-danmu-commit div {
-        margin-left: 20rpx;
-        height: 46rpx;
-        width: 110rpx;
-        border-radius: 10rpx;
-        text-align: center;
-        background-color: #C8513E;
-        line-height: 46rpx;
-        color: #ffffff;
-        font-family: 'Microsoft YaHei';
-        font-size: 28rpx;
-    }
+
 </style>
