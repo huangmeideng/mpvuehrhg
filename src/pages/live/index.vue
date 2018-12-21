@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <live-list v-if="showData" :liveData='liveData' @jumpLiveDetail="onJumpLiveDetail"></live-list>
-        <common-null v-if="showNull"></common-null>
+        <common-null v-if="showNull" :nullText="nullText"></common-null>
     </div>
 </template>
 
@@ -19,7 +19,8 @@ export default {
             liveData: [],
             page: 1,
             pageSize: 10,
-            pageMax: 1
+            pageMax: 1,
+            nullText: '暂无直播'
         }
     },
     computed: {

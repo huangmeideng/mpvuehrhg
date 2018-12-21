@@ -2,7 +2,7 @@
     <div class="container">
         <div class="null-box">
             <img :src="iconUrl" alt="">
-            <div>暂无内容</div>
+            <div>{{nullText}}</div>
         </div>
     </div>
 </template>
@@ -10,6 +10,7 @@
 <script>
 export default {
     name: 'CommonNull',
+    props: ['nullText'],
     data() {
         return {
             iconUrl: '/static/icon/null.png'

@@ -133,7 +133,7 @@ export default {
         font-size: 24rpx;
         margin-left: 30rpx;
     }
-        .video-danmu-list {
+    .video-danmu-list {
         background-color: #ffffff;
         height: 680rpx;
         border-bottom: 1rpx solid #C8513E;
