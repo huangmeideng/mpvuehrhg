@@ -9,23 +9,23 @@
 # 项目截图
 
 ## 资讯
-<img src='./picture/article.jpeg' style='width:50%;height:50%;'>
+<img src='./picture/article.jpeg' style='width:250px;height:500px;'>
 
 ## 课程
-<img src='./picture/course1.jpeg' style='width:50px;height:50%;'>
-<img src='./picture/course2.jpeg' style='width:50%;height:50%'>
+<img src='./picture/course1.jpeg' style='width:250px;height:500px;'>
+<img src='./picture/course2.jpeg' style='width:250px;height:500px;'>
 
 ## 播放页
-<img src='./picture/player.jpeg' style='width:50%;height:50%;'>
+<img src='./picture/player.jpeg' style='width:250px;height:500px;'>
 
 ## 直播页
-<img src='./picture/live.jpeg' style='width:50%;height:50%;'>
+<img src='./picture/live.jpeg' style='width:250px;height:500px;'>
 
 ## 节目页
-<img src='./picture/program.jpeg' style='width:50%;height:50%'>
+<img src='./picture/program.jpeg' style='width:250px;height:500px'>
 
 ## 用户页
-<img src='./picture/user.jpeg' style='width:50%;height:50%;'>
+<img src='./picture/user.jpeg' style='width:250px;height:500px;'>
 <!-- <img src="./picture/article.jpeg" style="width:120px;height:250px;">
 <img src="./picture/course1.jpeg" style="width:120px;height:250px;">
 <img src="./picture/course2.jpeg" style="width:120px;height:250px;">
